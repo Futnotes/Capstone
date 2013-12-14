@@ -5,6 +5,6 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
-  has_many :teams, through: :team_role
+  has_many :teams, through: :team_roles
   has_many :team_roles
 end
