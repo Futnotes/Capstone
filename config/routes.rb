@@ -1,7 +1,8 @@
 Blocnotes::Application.routes.draw do
-  get "welcome/index"
   
-  get "welcome/about"
+  resources :teams
+  
+  match "about" => 'welcome#about', via: :get
 
   root to: 'welcome#index'
 end
