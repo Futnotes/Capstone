@@ -121,7 +121,7 @@ PLATFORMS
 
 DEPENDENCIES
   coffee-rails (~> 4.0.0)
-  devise (= 3.0.0)
+  devise
   faker
   jbuilder (~> 1.2)
   jquery-rails
