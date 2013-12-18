@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131216102938) do
+ActiveRecord::Schema.define(version: 20131216142730) do
+
+  create_table "matches", force: true do |t|
+    t.integer  "team_id"
+    t.string   "team_two_name"
+    t.datetime "kick_off"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "matches", ["team_id"], name: "index_matches_on_team_id"
 
   create_table "team_roles", force: true do |t|
     t.integer  "user_id"

@@ -1,8 +1,5 @@
 class TeamsController < ApplicationController
   
-  def create
-    Team.create(team_params)
-  end
 
   def index
     #probably this needs to be deleted but input now just to gain access to the teams.
