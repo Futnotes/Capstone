@@ -1,13 +1,10 @@
 <h1><%= @team.team_name %></h1>
 <p>This is where the team info fixtures will appear!</p>
 
-Current team role = <%= current_user.role_on_team(@team) %>
 <% if current_user.role_on_team(@team) == 'manager' %>
 
-<p>Edit Team<p>
-<%= link_to "Edit", edit_team_path(@team), class: 'btn btn-mini' %>
+<%= link_to "Edit Team", edit_team_path(@team), class: "button [radius round]" %>
 
-<p>Create New Fixture<p>
-<%= link_to "New Fixture", new_match_path(team_id: @team.id), class: 'btn btn-mini' %>
+<%= link_to "New Fixture", new_match_path(team_id: @team.id), class: "button [radius round]" %>
 
 <% end %>

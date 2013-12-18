@@ -1,5 +1,15 @@
-//<h1><%= @match.team.team_name %></h1>
-//<p>This is where the team info fixtures will appear!</p>
+ 
+  <div class="row">
+    <div class="small-9 small-centered columns">
+    <h1><%= @match.team.team_name %></h1></div>
+    <div class="small-9 small-centered columns">
+    <h1> VS </h1></div>
+    <div class="small-9 small-centered columns">
+    <h1><%= @match.team_two_name %></h1></div>
+
+Kick-Off
+<%= @match.kick_off.strftime("%A %d %B %Y %H:%S") %>
+
 
 <p>Edit Match Details<p>
 <%= link_to "Edit", edit_match_path(@match), class: 'btn btn-mini' %>
