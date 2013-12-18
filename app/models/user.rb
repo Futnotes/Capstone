@@ -8,4 +8,10 @@ class User < ActiveRecord::Base
   has_many :teams, through: :team_roles
   has_many :team_roles
   has_many :matches, through: :teams
+
+
+  def role_on_team(team)
+    self.team_roles.where(team_id: team.id).first.role
+  end
+
 end
