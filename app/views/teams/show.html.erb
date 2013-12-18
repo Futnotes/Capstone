@@ -3,3 +3,8 @@
 
 <p>Edit Team<p>
 <%= link_to "Edit", edit_team_path(@team), class: 'btn btn-mini' %>
+
+<% if @team.current_user.team_role == 'manager' %>
+<p>Create New Fixture<p>
+<%= link_to "New Fixture", edit_match_path(@team), class: 'btn btn-mini' %>
+<% end %>
