@@ -7,9 +7,13 @@
     <div class="small-9 small-centered columns">
     <h1><%= @match.team_two_name %></h1></div>
 
-Kick-Off
-<%= @match.kick_off.strftime("%A %d %B %Y %H:%S") %>
+  <div class="row">
+    <div class="small-9 small-centered columns"> Kick-Off
+<p1><%= @match.kick_off.strftime("%A %d %B %Y %H:%S") %></p>
+</div>
 
 
-<p>Edit Match Details<p>
-<%= link_to "Edit", edit_match_path(@match), class: 'btn btn-mini' %>
+ <div class="row">
+    <div class="small-9 small-centered columns"> 
+<%= link_to "Edit", edit_match_path(@match), class: "button [radius round]" %>
+</div>

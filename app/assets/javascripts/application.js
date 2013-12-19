@@ -16,4 +16,6 @@
 //= require turbolinks
 //= require_tree .
 
+<script src="/js/custom.modernizr.js"></script>
+
 $(function(){ $(document).foundation(); });

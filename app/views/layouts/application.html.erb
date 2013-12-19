@@ -6,9 +6,13 @@
 
     <title><%= content_for?(:title) ? yield(:title) : "foundation-rails" %></title>
 
-    <%= stylesheet_link_tag    "application" %>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
     <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
+    <script src="js/jquery.js"></script>
+    <script src="js/foundation.js"></script>
+    <script src="js/foundation.dropdown.js"></script>
+    
   </head>
 
   <body>
@@ -52,5 +56,6 @@
 </div
 
     <%= javascript_include_tag "application" %>
+    
   </body>
 </html>
