@@ -1,0 +1,12 @@
+<%= form_for @match do |f| %>
+
+  <%= f.hidden_field :team_id %>
+  
+  <%= f.label :team_two_name %>
+  <%= f.text_field :team_two_name %>
+
+  <%= f.label :kick_off %>
+  <%= f.datetime_select :kick_off %>
+  
+  <%= f.submit "Save" %>
+<% end %>

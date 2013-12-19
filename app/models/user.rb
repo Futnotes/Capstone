@@ -12,7 +12,7 @@ class User < ActiveRecord::Base
 
 
   def role_on_team(team)
-    roles = self.team_roles.where(team_id: team.id)
+    @roles = self.team_roles.where(team_id: team.id)
     if @roles.blank?
       "none"
     else

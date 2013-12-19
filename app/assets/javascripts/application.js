@@ -10,12 +10,11 @@
 // Read Sprockets README (https://github.com/sstephenson/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
+//= require jquery-1.8.3.min
 //= require jquery_ujs
 //= require foundation
 //= require turbolinks
-//= require_tree .
-
-<script src="/js/custom.modernizr.js"></script>
+//= require_tree 
+//= require_self .
 
 $(function(){ $(document).foundation(); });
