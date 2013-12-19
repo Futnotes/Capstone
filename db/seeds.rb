@@ -37,12 +37,21 @@ u = User.new(
   password_confirmation: 'helloworld')
 u.save
 
-u.teams.create(
+t = u.teams.create(
       team_name: "Fulham FC"
       )
       TeamRole.last.update_attribute(:role, "manager")
+t.save
+
+rand(3..4).times do
+  t.matches.create(
+    team_two_name: Faker::Lorem.words(rand(1..2)).join(" "),
+    kick_off: Time.now + rand(600..3153600)
+    )
+end
  
 
+ 
 
 puts "Seed finished"
 puts "#{Team.count} teams created"

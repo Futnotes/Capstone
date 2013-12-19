@@ -3,21 +3,18 @@
 <div>
 <% @team.team_matches.each do |match| %>
   <div>
-    <%= match.team.team_name %> VS <%= match.team_two_name %>
+    <h4><%= match.team.team_name %><h4><h6> VS <h6><h4><%= match.team_two_name %><h4>
   </div>
   <div>
-    <p><%= match.kick_off.strftime("%A %d %B %Y %H:%S") %><p>
+    <p>Kick Off: <%= match.kick_off.strftime("%A %d %B %Y %H:%S") %><p>
   </div>
 
   <% end %>
 
 </div>
 
-
 <% if current_user.role_on_team(@team) == 'manager' %>
   <%= link_to "Edit Team", edit_team_path(@team), class: "button [radius round]" %>
   <%= link_to "New Fixture", new_match_path(team_id: @team.id), class: "button [radius round]" %>
-<% elsif current_user.role_on_team(@team) = nil %>
-  <p>You are not a manager of this team<p>
 
 <% end %>
