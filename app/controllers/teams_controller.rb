@@ -47,3 +47,6 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:team_name, :team_name_short)
   end
 end
+
+
+
