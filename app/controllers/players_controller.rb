@@ -4,8 +4,12 @@ class PlayersController < ApplicationController
     @players = User.all
   end
 
+  def new
+    @player = User.new
+  end
+
   def create
-    @player = User.new(user_params)
+    @player = User.new(player_params)
     if @player.save
       TeamRole.create(team_id: @team.id, user_id: @player.id, role: "player")
       flash[:notice] = "Player was created."
@@ -27,7 +31,7 @@ class PlayersController < ApplicationController
 private
 
   def player_params
-    params.require(:player).permit(:name, :email)
+    params.require(:user).permit(:name, :email)
   end
 
 end

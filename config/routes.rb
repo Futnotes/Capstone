@@ -1,10 +1,14 @@
 Blocnotes::Application.routes.draw do
   
-  get "players/new"
+  match "/players/new" => "players#create", :via => [:post]
   get "goals/new"
   get "goals/edit"
   devise_for :users
-  resources :teams
+  
+  resources :teams do
+    resources :players, only: [:create]
+  end
+
   resources :matches
 
   match "about" => 'welcome#about', via: :get
