@@ -1,14 +1,13 @@
 class PlayersController < ApplicationController
 
   def index
-    @team = Team.find(params[:team_id])
-    @players = User.where(@team.team_role = 'true')
+    @players = User.all
   end
 
   def create
-    @user = User.new(user_params)
+    @player = User.new(user_params)
     if @player.save
-      TeamRole.create(team_id: @team.id, user_id: @player.user.id, role: "player")
+      TeamRole.create(team_id: @team.id, user_id: @player.id, role: "player")
       flash[:notice] = "Player was created."
       redirect_to @team
     else

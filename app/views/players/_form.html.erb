@@ -1,9 +1,9 @@
-<%= form_for @player do |f| %>
+<%= form_for(@player, :url => players_path) do |f| %>
   
     <%= f.hidden_field :team_id, value: params[:team_id] %>
 
     <%= f.label :name %>
-    <%= f.text.field :name %>
+    <%= f.text_field :name %>
 
     <%= f.submit "Save" %>
 
