@@ -43,16 +43,17 @@
         <h4><strong>Squad</strong></h4>
 
           <div>
+            <ul class="no-bullet">
             <% @team.users.each do |t| %>
             <div>
-              <li><%= t.name %></li>
+              <li><h4><%= t.name %></h4></li>
              </div>
              <% end %>
           </div> 
 
           <div>
             <% if current_user.role_on_team(@team) == 'manager' %>
-              <h4>New Player</h4>
+              <h6>Add New Player</h6>
               <%= render partial: 'players/form', locals: { team: @team } %>
             <% end %>
           </div>

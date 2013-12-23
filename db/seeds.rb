@@ -1,7 +1,7 @@
 require 'faker'
 
 
-#create 5 users
+#create 5 managers
 5.times do
   password = Faker::Lorem.characters(10)
    u = User.new(
@@ -29,10 +29,17 @@ Team.all.each do |team|
       kick_off: Time.now + rand(600..3153600)
       )
   end
+
+  rand(11..16).times do
+    team.users.create(
+      name: Faker::Name.name,
+      )
+    TeamRole.last.update_attribute(:role, "player")
+  end
 end
 
 u = User.new(
-  name: 'Member User Default'
+  name: 'Member User Default',
   email: 'member@example.com', 
   password: 'helloworld', 
   password_confirmation: 'helloworld')
@@ -49,8 +56,14 @@ rand(3..4).times do
     team_two_name: Faker::Lorem.words(rand(1..2)).join(" "),
     kick_off: Time.now + rand(600..3153600)
     )
+
+  11.times do
+    t.users.create(
+      name: Faker::Name.name,
+      )
+    TeamRole.last.update_attribute(:role, "player")
+  end
 end
- 
 
  
 
