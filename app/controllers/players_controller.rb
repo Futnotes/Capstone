@@ -10,7 +10,7 @@ class PlayersController < ApplicationController
 
   def create
     @player = User.new(player_params)
-    if @player.save
+    if @player.save!
       TeamRole.create(team_id: @team.id, user_id: @player.id, role: "player")
       flash[:notice] = "Player was created."
       redirect_to @team
