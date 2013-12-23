@@ -32,6 +32,7 @@ Team.all.each do |team|
 end
 
 u = User.new(
+  name: 'Member User Default'
   email: 'member@example.com', 
   password: 'helloworld', 
   password_confirmation: 'helloworld')
