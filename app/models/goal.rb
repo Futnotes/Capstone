@@ -1,5 +1,5 @@
 class Goal < ActiveRecord::Base
   belongs_to :user
-  belongs_to :match, through: :team
-  belongs_to :team
+  belongs_to :match
+  belongs_to :team, through: :users
 end

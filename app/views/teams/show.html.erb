@@ -1,6 +1,6 @@
 <h1><%= @team.team_name %></h1>
 <div>
-<h4>You are a <strong><%= current_user.role_on_team(@team) %></strong>!</h4>
+<h4>You are a <strong><%= current_user.role_on_team(@team) %></strong></h4>
 </div>
 
 <% if current_user.role_on_team(@team) == 'manager' %>
@@ -53,7 +53,7 @@
 
           <div>
             <% if current_user.role_on_team(@team) == 'manager' %>
-              <h6>Add New Player</h6>
+          
               <%= render partial: 'players/form', locals: { team: @team } %>
             <% end %>
           </div>
