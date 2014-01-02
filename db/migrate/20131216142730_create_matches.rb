@@ -1,8 +1,8 @@
 class CreateMatches < ActiveRecord::Migration
   def change
     create_table :matches do |t|
-      t.references :team, index: true
-      t.string :team_two_name
+      t.references :home_team, index: true
+      t.references :away_team, index: true 
       t.datetime :kick_off
 
       t.timestamps

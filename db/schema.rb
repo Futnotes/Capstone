@@ -17,6 +17,7 @@ ActiveRecord::Schema.define(version: 20131219100418) do
     t.integer  "value"
     t.integer  "user_id"
     t.integer  "match_id"
+    t.integer  "team_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -25,8 +26,8 @@ ActiveRecord::Schema.define(version: 20131219100418) do
   add_index "goals", ["user_id"], name: "index_goals_on_user_id"
 
   create_table "matches", force: true do |t|
-    t.integer  "team_id"
-    t.string   "team_two_name"
+    t.integer  "home_team_id"
+    t.integer  "away_team_id"
     t.datetime "kick_off"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -34,7 +35,8 @@ ActiveRecord::Schema.define(version: 20131219100418) do
     t.integer  "team_two_score"
   end
 
-  add_index "matches", ["team_id"], name: "index_matches_on_team_id"
+  add_index "matches", ["away_team_id"], name: "index_matches_on_away_team_id"
+  add_index "matches", ["home_team_id"], name: "index_matches_on_home_team_id"
 
   create_table "team_roles", force: true do |t|
     t.integer  "user_id"

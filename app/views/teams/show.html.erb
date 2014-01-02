@@ -20,9 +20,9 @@
           <div>
             <% @team.team_matches.each do |match| %>
               <div>
-                <h4><%= match.team.team_name %></h4>
+                <h4><%= match.away_team.team_name %></h4>
                 <h6> VS </h6>
-                <h4><%= match.team_two_name %></h4>
+                <h4><%= match.home_team.team_name %></h4>
               </div>
               <div>
                 <p>Kick Off: <%= match.kick_off.strftime("%A %d %B %Y %H:%S") %><p>
@@ -31,7 +31,7 @@
           </div>
           <div>
             <% if current_user.role_on_team(@team) == 'manager' %>
-          <%= link_to "New Fixture", new_match_path(team_id: @team.id), class: "button [radius round]" %>
+          <%= link_to "New Fixture", new_match_path(home_team_id: @team.id), class: "button [radius round]" %>
             <% end %>
           </div>
       </div>

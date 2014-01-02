@@ -10,6 +10,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'devise'
 gem 'foundation-rails'
+gem 'pry'
 
 group :production do
   gem 'pg'

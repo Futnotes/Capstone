@@ -4,6 +4,7 @@ class CreateGoals < ActiveRecord::Migration
       t.integer :value
       t.references :user, index: true
       t.references :match, index: true
+      t.references :team
 
       t.timestamps
     end

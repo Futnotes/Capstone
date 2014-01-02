@@ -6,9 +6,10 @@
       <%= form_for(@player, :url => players_new_path, :method => :post) do |f| %>
    
           <%= f.hidden_field :team_id, value: params[:id] %>
+      
       <div class="row collapse">
+        
         <div class="large-7 columns">
-       
           <%= f.text_field :name, placeholder: 'Add New Player' %>
         </div>
        

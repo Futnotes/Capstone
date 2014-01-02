@@ -1,12 +1,14 @@
 <%= form_for @match do |f| %>
 
-  <%= f.hidden_field :team_id, value: params[:team_id] %>
+  <%= f.hidden_field :home_team_id, value: params[:home_team_id] %>
   
-  <%= f.label :team_two_name %>
-  <%= f.text_field :team_two_name %>
+  <%= f.label :away_team %>
+  <%= f.text_field :away_team %>
 
   <%= f.label :kick_off %>
   <%= f.datetime_select :kick_off %>
   
   <%= f.submit "Save" %>
 <% end %>
+
+<!-- Write, in html,  the form inputs for all of the data that you need.  Pay attention to the name attribute of these HTML elements.   Once you form puts all of the necessary data in the params hash, unpack it manually in the matches#create action. -->

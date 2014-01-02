@@ -12,6 +12,7 @@ class PlayersController < ApplicationController
   def create
     @player = User.new(player_params)
     @team = :team
+   
     if @player.save!
       TeamRole.create(team_id: params[:user][:team_id], user_id: @player.id, role: "player")
       flash[:notice] = "Player was created."
