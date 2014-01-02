@@ -21,11 +21,11 @@ require 'faker'
     end
 end
 
-Team.all.each do |team|
+Team.all.each do |home_team|
   rand(3..4).times do
-    team.matches.create(
-      team: team,
-      team_two_name: Faker::Lorem.words(rand(1..2)).join(" "),
+    home_team.matches.create(
+      home_team: team,
+      away_team: Faker::Lorem.words(rand(1..2)).join(" "),
       kick_off: Time.now + rand(600..3153600)
       )
   end

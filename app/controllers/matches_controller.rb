@@ -20,17 +20,25 @@ class MatchesController < ApplicationController
     #You will have to create a team with it.
 
     #away_team_name = params.delete[:away_team_name]
-    #binding.pry
+   
     #>> params
     # Team.create(....)
 
     #away_team_score
     #create x number of goals based on away_team_score and home_team_score
-    @away_team = Team.create(team_name: params[:away_team])
-    @match = Match.new(match_params)
-    p match_params
-    @away_team = Team.create(team_name: params[:away_team])
-    if @match.save
+   
+    @away_team = Team.create(team_name: params[:match][:away_team_id])
+     
+   kick_off = DateTime.new(params[:match]["kick_off(1i)"].to_i,
+                          params[:match]["kick_off(2i)"].to_i,
+                          params[:match]["kick_off(3i)"].to_i,
+                          params[:match]["kick_off(4i)"].to_i,
+                          params[:match]["kick_off(5i)"].to_i,
+                          params[:match]["kick_off(6i)"].to_i)
+   
+    @match = Match.new(home_team_id: params[:match][:home_team_id], 
+                        away_team_id: @away_team.id, kick_off: kick_off)  
+    if @match.save 
       flash[:notice] = "Match was created."
       redirect_to @match
     else
