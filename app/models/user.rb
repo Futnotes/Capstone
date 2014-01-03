@@ -10,6 +10,8 @@ class User < ActiveRecord::Base
   has_many :matches, through: :teams
   has_many :goals
 
+  has_many :availabilities
+
 
   def role_on_team(team)
     @roles = self.team_roles.where(team_id: team.id)

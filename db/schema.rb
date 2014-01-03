@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131219100418) do
+ActiveRecord::Schema.define(version: 20140103061853) do
+
+  create_table "availabilities", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "match_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "availabilities", ["match_id"], name: "index_availabilities_on_match_id"
+  add_index "availabilities", ["user_id"], name: "index_availabilities_on_user_id"
 
   create_table "goals", force: true do |t|
     t.integer  "value"

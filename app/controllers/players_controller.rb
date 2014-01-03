@@ -11,6 +11,7 @@ class PlayersController < ApplicationController
 
   def create
     @player = User.new(player_params)
+    
     @team = :team
    
     if @player.save!
