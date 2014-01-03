@@ -5,6 +5,7 @@ class Match < ActiveRecord::Base
   belongs_to :user
   has_many :goals
 
+  
   def winner
     #This will require you to write other methods that calculate the goals based on the two teams
 

@@ -25,12 +25,12 @@ end
 
 Team.all.each do |home_team|
   rand(3..4).times do
-    t = Team.create(
+    away_team = Team.create(
       team_name: Faker::Lorem.words(rand(1..2)).join(" ")
       )
-    home_team.matches.create(
+    Match.create(
       home_team_id: home_team.id,
-      away_team_id: t.id,
+      away_team_id: away_team.id,
       kick_off: Time.now + rand(600..3153600)
       )
   end
@@ -57,12 +57,12 @@ dummy_team = u.teams.create(
 dummy_team.save
 
 rand(3..4).times do
-  t = Team.create(
+  away_team = Team.create(
     team_name: Faker::Lorem.words(rand(1..2)).join(" ")
      )
-  dummy_team.matches.create(
+  Match.create(
     home_team_id: dummy_team.id,
-    away_team_id: t.id,
+    away_team_id: away_team.id,
     kick_off: Time.now + rand(600..3153600)
     )
 
