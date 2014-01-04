@@ -42,13 +42,17 @@ class MatchesController < ApplicationController
 
   def edit
     @match = Match.find(params[:id])
+    @zebra = Team.find(@match.away_team_id).team_name
   end
 
   def update
     @match = Match.find(params[:id])
-    away_team = Team.find(params[:match][:away_team_id])
+    @team = Team.find(@match.away_team_id)
    
     if @match.update_attributes(match_params)
+      if @team.team_name != params[:match][:team_name]
+      @team.update_attribute(:team_name , params[:match][:team_name])
+    end
       flash[:notice] = "Match was updated."
       redirect_to @match
     else
@@ -65,6 +69,6 @@ class MatchesController < ApplicationController
    private
 
   def match_params
-    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score)
+    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score )
   end
 end

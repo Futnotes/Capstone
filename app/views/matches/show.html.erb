@@ -15,7 +15,7 @@
  <div class="row">
     <% if current_user.role_on_team(@match.home_team) == 'manager' %>
     <div class="small-9 small-centered columns"> 
-<%= link_to "Edit", edit_match_path(home_team_id: @match.home_team.id, away_team: @match.away_team), class: "button [radius round]" %>
+<%= link_to "Edit", edit_match_path(home_team_id: @match.home_team.id), class: "button [radius round]" %>
     <% end %>
 </div>
 
