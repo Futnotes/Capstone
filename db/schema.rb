@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140103061853) do
+ActiveRecord::Schema.define(version: 20140103154517) do
 
   create_table "availabilities", force: true do |t|
     t.integer  "user_id"
@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20140103061853) do
     t.datetime "updated_at"
     t.integer  "team_one_score"
     t.integer  "team_two_score"
+    t.integer  "home_team_score"
+    t.integer  "away_team_score"
   end
 
   add_index "matches", ["away_team_id"], name: "index_matches_on_away_team_id"

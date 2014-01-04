@@ -15,14 +15,7 @@ class MatchesController < ApplicationController
   end
 
   def create
-    #Handle an incoming `` params `` that contains a away_team_name,
-    # that doesn't necessarily match up with any team in the database.
-    #You will have to create a team with it.
-
-    #away_team_name = params.delete[:away_team_name]
-   
-    #>> params
-    # Team.create(....)
+ 
 
     #away_team_score
     #create x number of goals based on away_team_score and home_team_score
@@ -53,6 +46,8 @@ class MatchesController < ApplicationController
 
   def update
     @match = Match.find(params[:id])
+    away_team = Team.find(params[:match][:away_team_id])
+   
     if @match.update_attributes(match_params)
       flash[:notice] = "Match was updated."
       redirect_to @match
@@ -62,9 +57,14 @@ class MatchesController < ApplicationController
     end
   end
 
+  def update_score
+    @match = Match.find(params[:id])
+    
+  end
+
    private
 
   def match_params
-    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off)
+    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score)
   end
 end

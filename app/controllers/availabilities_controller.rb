@@ -5,18 +5,10 @@ class AvailabilitiesController < ApplicationController
   end
 
   def create
-
     @availability = Availability.new(availability_params)
-    
-    @match = :match
 
-     if @availability.save!
-      flash[:notice] = "Player was created."
-      redirect_to @availability.match
-    else
-      flash[:error] = "There was an error creating the player. Please try again."
-      render :new
-    end
+    @availability.save!
+    redirect_to @availability.match
   end
 
   private

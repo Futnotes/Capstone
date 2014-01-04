@@ -1,9 +1,16 @@
 <%= form_for @match do |f| %>
 
-  <%= f.hidden_field :team_id %>
+
+  <input id="match_home_team_id" name="match[home_team_id]" type="hidden" value= <%= @match.home_team.id %> />
   
-  <%= f.label :team_two_name %>
-  <%= f.text_field :team_two_name %>
+  <label for="match_away_team">Away team</label>
+  <input id="match_away_team_id" name="match[away_team_id]" type="text" value= <%= @match.away_team.id %> />
+
+ <%= f.label "#{@match.home_team.team_name} Score" %>
+  <%= f.text_field :home_team_score %>
+
+  <%= f.label "#{@match.away_team.team_name} Score"%>
+  <%= f.text_field :away_team_score %>
 
   <%= f.label :kick_off %>
   <%= f.datetime_select :kick_off %>

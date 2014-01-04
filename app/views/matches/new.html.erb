@@ -1,4 +1,4 @@
-<%= form_for @match do |f| %>
+<%= form_for(@match, :url => matches_edit_path(@match), :method => :post do |f| %>  
 
   <%= f.hidden_field :home_team_id, value: params[:home_team_id] %>
   

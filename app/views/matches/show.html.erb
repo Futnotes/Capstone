@@ -12,23 +12,31 @@
 <p1><%= @match.kick_off.strftime("%A %d %B %Y %H:%S") %></p>
 </div>
 
+ <div class="row">
+    <% if current_user.role_on_team(@match.home_team) == 'manager' %>
+    <div class="small-9 small-centered columns"> 
+<%= link_to "Edit", edit_match_path(home_team_id: @match.home_team.id, away_team: @match.away_team), class: "button [radius round]" %>
+    <% end %>
+</div>
 
-<div>
+<div class="row">
+    <div class="small-9 small-centered columns">
+    <h1> Squad </h1>
     <ul class="no-bullet">
         <% @match.availabilities.each do |t| %>
             <div>
                 <li><h4><%= t.user.name %></h4></li>
             </div>
         <% end %>
+
+
+
+
+
+<% if current_user.role_on_team(@match.home_team) == 'manager' || 'player' %>
+  <div>
+<%= render partial: 'availabilities/form', locals: { match: @match, user: @current_user } %>
+  <% end %>
+</div>
 </div> 
 
-
- <div class="row">
-    <div class="small-9 small-centered columns"> 
-<%= link_to "Edit", edit_match_path(@match), class: "button [radius round]" %>
-</div>
-
-
-
-<%= render partial: 'availabilities/form', locals: { match: @match, user: @current_user } %>
-            
