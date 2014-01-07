@@ -1,21 +1,30 @@
+
 <%= form_for @match do |f| %>
 
 
 <%= f.hidden_field :home_team_id, value: params[:home_team_id] %>
   
-  <%= f.label :away_team %>
-  <%= f.text_field :away_team_id %>
+   <%= f.label "Away Team Name" %>
+  <%=f.text_field :team_name, value: @zebra %>
 
-  <%=f.text_field :team_name, :value => @team_name%>
+  <%= f.fields_for :home_team_goals do |antelope| %>
+    <fieldset>
+      <%= antelope.label "#{@match.home_team.team_name} Goal" %><br />
+      <%= antelope.collection_select(:user_id, @match.home_team.users, :id, :name) %>
+    </fieldset>
+  <% end %>
 
- <%= f.label "#{@match.home_team.team_name} Score" %>
-  <%= f.text_field :home_team_score %>
 
-  <%= f.label "#{@match.away_team.team_name} Score"%>
-  <%= f.text_field :away_team_score %>
+ <%#= f.label "#{@match.home_team.team_name} Score" %>
+ <!-- <input id="home_team_score" name="match[home_team_score]" type="text" /> -->
+
+ <%#= f.label "#{@match.away_team.team_name} Score" %>
+ <%#= f.text_field :away_team_score %>
 
   <%= f.label :kick_off %>
   <%= f.datetime_select :kick_off %>
   
   <%= f.submit "Save" %>
 <% end %>
+
+

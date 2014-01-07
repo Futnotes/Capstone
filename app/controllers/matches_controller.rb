@@ -48,16 +48,21 @@ class MatchesController < ApplicationController
   def update
     @match = Match.find(params[:id])
     @team = Team.find(@match.away_team_id)
-   
-    if @match.update_attributes(match_params)
+    params[:match][:home_team_score].to_i.times do
+      Goal.create(match_id: @match.id, team_id: @match.home_team_id)
+    end
+
+    params[:match][:away_team_score].to_i.times do
+      Goal.create(match_id: @match.id, team_id: @match.away_team_id)
+    end
+  
       if @team.team_name != params[:match][:team_name]
       @team.update_attribute(:team_name , params[:match][:team_name])
-    end
       flash[:notice] = "Match was updated."
       redirect_to @match
     else
       flash[:error] = "There was an error saving the match details. Please try again."
-      render :edit
+      render :show
     end
   end
 
@@ -69,6 +74,6 @@ class MatchesController < ApplicationController
    private
 
   def match_params
-    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score )
+    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score, goals_attributes: [:id, :team_id, :match_id, :user_id] )
   end
 end
