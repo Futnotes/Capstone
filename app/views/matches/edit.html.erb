@@ -7,11 +7,8 @@
    <%= f.label "Away Team Name" %>
   <%=f.text_field :team_name, value: @zebra %>
 
-  <%= f.fields_for :home_team_goals do |antelope| %>
-    <fieldset>
-      <%= antelope.label "#{@match.home_team.team_name} Goal" %><br />
-      <%= antelope.collection_select(:user_id, @match.home_team.users, :id, :name) %>
-    </fieldset>
+  <%= f.fields_for :goals, @match.home_team_goals do |builder| %>
+    <%= render 'goals/add_scorer', f: builder %>
   <% end %>
 
 

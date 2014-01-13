@@ -46,8 +46,11 @@ class MatchesController < ApplicationController
   end
 
   def update
+    #note: kick-off editing doesn't work
     @match = Match.find(params[:id])
     @team = Team.find(@match.away_team_id)
+
+    #adding team scores
     params[:match][:home_team_score].to_i.times do
       Goal.create(match_id: @match.id, team_id: @match.home_team_id)
     end
@@ -55,7 +58,8 @@ class MatchesController < ApplicationController
     params[:match][:away_team_score].to_i.times do
       Goal.create(match_id: @match.id, team_id: @match.away_team_id)
     end
-  
+
+    #ensuring we only update team name if a change has been made
       if @team.team_name != params[:match][:team_name]
       @team.update_attribute(:team_name , params[:match][:team_name])
       flash[:notice] = "Match was updated."
@@ -74,6 +78,6 @@ class MatchesController < ApplicationController
    private
 
   def match_params
-    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score, goals_attributes: [:id, :team_id, :match_id, :user_id] )
+    params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score, goal_attributes: [:id, :team_id, :match_id, :user_id] )
   end
 end

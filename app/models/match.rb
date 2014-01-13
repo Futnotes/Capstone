@@ -7,7 +7,7 @@ class Match < ActiveRecord::Base
 
   has_many :availabilities
 
-  accepts_nested_attributes_for :goals
+  accepts_nested_attributes_for :goals, allow_destroy: true
   
   def winner
     #This will require you to write other methods that calculate the goals based on the two teams
@@ -26,7 +26,7 @@ class Match < ActiveRecord::Base
   end
 
   def home_team_goals
-    Goal.where(team_id: home_team.id).where(match_id: id)
+    Goal.where(team_id: home_team.id).where(match_id: id).all
   end
 
   def away_team_goals
