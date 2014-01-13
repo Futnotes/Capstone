@@ -33,4 +33,12 @@ class Match < ActiveRecord::Base
     Goal.where(team_id: away_team.id).where(match_id: id)
   end
 
+  def future?
+    DateTime.now < kick_off
+  end
+
+  def past?
+    DateTime.now > kick_off
+  end
+
 end

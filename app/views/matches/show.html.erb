@@ -19,8 +19,11 @@
         <h1> <%= @match.away_team_score %></h1></div>
   </div>
 
-<%= render partial: 'matches/score_form', locals: { match: @match } %>
-
+  <div class="row">
+    <% if @match.past? == true %> 
+      <%= render partial: 'matches/score_form', locals: { match: @match } %>
+    <% end %>
+  </div>
 
   <div class="row">
     <div class="small-9 large-9 columns"><p1><%= @match.kick_off.strftime("%A %d %B %Y %H:%S") %></p></div>

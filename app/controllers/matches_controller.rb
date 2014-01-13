@@ -59,6 +59,18 @@ class MatchesController < ApplicationController
       Goal.create(match_id: @match.id, team_id: @match.away_team_id)
     end
 
+    # Delete Goal / Add scorer
+    if @match.home_team_score != 0
+      params[:match][:goals_attributes].each do |key, value|
+        if value["_destroy"] == "1"
+          Goal.destroy(value["id"].to_i)
+        end
+        goal = Goal.find(value["id"].to_i)
+        goal.update_attribute(:user_id, value["user_id"].to_i)
+      end
+    end
+
+
     #ensuring we only update team name if a change has been made
       if @team.team_name != params[:match][:team_name]
       @team.update_attribute(:team_name , params[:match][:team_name])
