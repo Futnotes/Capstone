@@ -1,7 +1,6 @@
 <fieldset>
   <%= f.label "#{@match.home_team.team_name} Goal" %><br />
   <%= f.collection_select(:user_id, @match.home_team.users, :id, :name) %><br />
-  <%= f.check_box :_destroy %>
-  <%= f.label :_destroy, "Remove Goal" %>
- 
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", '#', class:  "remove_fields" %>
 </fieldset>

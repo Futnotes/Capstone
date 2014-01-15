@@ -19,7 +19,7 @@
  <%#= f.text_field :away_team_score %>
 
   <%= f.label :kick_off %>
-  <%= f.datetime_select :kick_off %>
+  <%= f.datetime_select :kick_off, value: @giraffe %>
   
   <%= f.submit "Save" %>
 <% end %>

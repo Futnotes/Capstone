@@ -42,13 +42,15 @@ class MatchesController < ApplicationController
 
   def edit
     @match = Match.find(params[:id])
-    @zebra = Team.find(@match.away_team_id).team_name
+    
+   
   end
 
   def update
     #note: kick-off editing doesn't work
     @match = Match.find(params[:id])
     @team = Team.find(@match.away_team_id)
+    @match.kick_off = params[:match][:kick_off]
 
     #adding team scores
     params[:match][:home_team_score].to_i.times do
@@ -70,6 +72,12 @@ class MatchesController < ApplicationController
       end
     end
 
+    @match.kick_off = DateTime.new(params[:match]["kick_off(1i)"].to_i,
+                          params[:match]["kick_off(2i)"].to_i,
+                          params[:match]["kick_off(3i)"].to_i,
+                          params[:match]["kick_off(4i)"].to_i,
+                          params[:match]["kick_off(5i)"].to_i,
+                          params[:match]["kick_off(6i)"].to_i)
 
     #ensuring we only update team name if a change has been made
       if @team.team_name != params[:match][:team_name]
@@ -82,10 +90,7 @@ class MatchesController < ApplicationController
     end
   end
 
-  def update_score
-    @match = Match.find(params[:id])
-    
-  end
+ 
 
    private
 
