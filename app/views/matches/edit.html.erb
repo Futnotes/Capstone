@@ -5,9 +5,9 @@
 <%= f.hidden_field :home_team_id, value: params[:home_team_id] %>
   
    <%= f.label "Away Team Name" %>
-  <%=f.text_field :team_name, value: @zebra %>
+  <%=f.text_field :team_name, value: @match.away_team.team_name %>
 
-  <%= f.fields_for :goals, @match.home_team_goals do |builder| %>
+  <%= f.fields_for :goals, @match.home_team_score do |builder| %>
     <%= render 'goals/add_scorer', f: builder %>
   <% end %>
 

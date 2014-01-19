@@ -1,0 +1,10 @@
+
+<%= form_for(Availability.destroy, :url => availabilities_destroy_path, :method => :delete) do |f| %>
+   
+<%= f.hidden_field :match_id, value: params[:id] %>
+<%= f.hidden_field :user_id, :value => current_user.id %>
+
+<%= f.submit "Can you play?",  class: "button postfix" %>
+
+<% end %>
+    

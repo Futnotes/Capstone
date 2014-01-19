@@ -11,6 +11,13 @@ class AvailabilitiesController < ApplicationController
     redirect_to @availability.match
   end
 
+  def destroy
+    
+    @availability = Availability.where(user_id: current_user.id, match_id: params[:id])
+    @availability.destroy_all
+    redirect_to :back
+  end
+
   private
 
   def availability_params

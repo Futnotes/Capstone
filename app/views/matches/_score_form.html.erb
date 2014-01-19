@@ -1,14 +1,30 @@
-
-<%= form_for @match do |f| %>
+<div class="row">
      
-<%= hidden_field_tag "match[team_name]", @match.away_team.team_name %>
+      <%= form_tag "/matches/update_goals", method: :post do %>
+       
+      <%= hidden_field_tag :match_id, @match.id %>
 
- <%= f.label "#{@match.home_team.team_name} Score" %>
- <input id="home_team_score" name="match[home_team_score]" type="text" />
+    <div class="row">
+       <div class="small-3 large-3 columns">
+        <h3 class="subheader">Enter Score</h3>
+        </div>
+    </div>
 
- <%= f.label "#{@match.away_team.team_name} Score" %>
- <%= f.text_field :away_team_score %>
+      <div class="small-3 large-3 columns">
+        <label><%= label_tag "#{@match.home_team.team_name} Score" %></label>
+        <%= text_field_tag :home_team_score, nil, required: :true %>
+      </div>
 
-  
-  <%= f.submit "Save" %>
-<% end %>
+      <div class="small-3 large-3 columns">
+        <label><%= label_tag "#{@match.away_team.team_name} Score" %></label>
+        <%= text_field_tag :away_team_score, nil, required: :true  %>
+      </div>
+   
+      <%= hidden_field_tag :score_updated, @match.score_updated %>
+
+    <div class="row">
+      <%= submit_tag "Save", class: "tiny button [radius round]" %>
+    </div>
+      <% end %>
+</div>
+

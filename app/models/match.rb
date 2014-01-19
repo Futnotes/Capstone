@@ -21,17 +21,18 @@ class Match < ActiveRecord::Base
     Goal.where(team_id: home_team.id).where(match_id: id).all.count
   end
 
-  def away_team_score
-    Goal.where(team_id: away_team.id).where(match_id: id).all.count
-  end
+#hashed this out and calling the match.away_team_score directly
+ # def away_team_score
+    #Goal.where(team_id: away_team.id).where(match_id: id).all.count
+  #end
 
-  def home_team_goals
-    Goal.where(team_id: home_team.id).where(match_id: id).all
-  end
+  #def home_team_goals
+    #Goal.where(team_id: home_team.id).where(match_id: id).all
+  #end
 
-  def away_team_goals
-    Goal.where(team_id: away_team.id).where(match_id: id)
-  end
+  #def away_team_goals
+    #Goal.where(team_id: away_team.id).where(match_id: id).all
+  #end
 
   def future?
     DateTime.now < kick_off
