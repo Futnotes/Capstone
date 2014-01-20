@@ -8,6 +8,8 @@ class MatchesController < ApplicationController
 
   def show
     @match = Match.find(params[:id])
+    puts "____________ The current user is currently: #{current_user.id} _______________"
+    @availability = Availability.where(user_id: current_user.id, match_id: params[:match_id])
   end
 
   def new

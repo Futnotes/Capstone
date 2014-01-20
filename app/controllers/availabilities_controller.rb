@@ -12,9 +12,8 @@ class AvailabilitiesController < ApplicationController
   end
 
   def destroy
-    
-    @availability = Availability.where(user_id: current_user.id, match_id: params[:id])
-    @availability.destroy_all
+    puts "---------- Params passed to controller: #{params} ------------"
+    @availability = Availability.where(user_id: current_user.id, match_id: params[:match_id]).first.delete
     redirect_to :back
   end
 
