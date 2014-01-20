@@ -84,15 +84,20 @@ class MatchesController < ApplicationController
     @match.update_attribute(:kick_off, kick_off)
 
 
-    #ensuring we only update team name if a change has been made
+    #doesn't work if both are changed... logic to ensure changes are only made if actual changes are made.
       if @team.team_name != params[:match][:team_name]
-      @team.update_attribute(:team_name , params[:match][:team_name])
-      flash[:notice] = "Match was updated."
-      redirect_to @match
-    else
-      flash[:error] = "There was an error saving the match details. Please try again."
-      render :show
-    end
+        @team.update_attribute(:team_name , params[:match][:team_name])
+      elsif @match.away_team_score != params[:match][:away_team_score]
+         @match.update_attribute(:away_team_score , params[:match][:away_team_score])  
+        flash[:notice] = "Match was updated."
+        redirect_to @match
+      else
+        flash[:error] = "There was an error saving the match details. Please try again."
+        render :show
+      end
+
+
+
   end
 
   def update_goals

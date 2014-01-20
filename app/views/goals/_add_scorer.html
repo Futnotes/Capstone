@@ -3,4 +3,5 @@
   <%= f.collection_select(:user_id, @match.home_team.users, :id, :name) %><br />
   <%= f.hidden_field :_destroy %>
   <%= link_to "remove", '#', class:  "remove_fields" %>
+
 </fieldset>
