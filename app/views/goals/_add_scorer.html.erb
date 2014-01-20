@@ -1,0 +1,7 @@
+<fieldset>
+  <%= f.label "#{@match.home_team.team_name} Goal" %><br />
+  <%= f.collection_select(:user_id, @match.home_team.users, :id, :name, prompt: "Choose a scorer", include_blank: "Not specified") %><br />
+  <%= f.hidden_field :_destroy %>
+  <%= link_to "remove", '#', class:  "remove_fields" %>
+
+</fieldset>

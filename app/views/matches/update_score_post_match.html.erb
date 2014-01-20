@@ -1,0 +1,31 @@
+#this code is just grabbed from the _score_form and has not been updated in anyway
+
+<div class="row">
+     
+      <%= form_tag "/matches/update_goals", method: :post do %>
+       
+      <%= hidden_field_tag :match_id, @match.id %>
+
+    <div class="row">
+       <div class="small-3 large-3 columns">
+        <h3 class="subheader">Enter Score</h3>
+        </div>
+    </div>s
+
+      <div class="small-3 large-3 columns">
+        <label><%= label_tag "#{@match.home_team.team_name} Score" %></label>
+        <%= text_field_tag :home_team_score, nil, required: :true %>
+      </div>
+
+      <div class="small-3 large-3 columns">
+        <label><%= label_tag "#{@match.away_team.team_name} Score" %></label>
+        <%= text_field_tag :away_team_score, nil, required: :true  %>
+      </div>
+   
+      <%= hidden_field_tag :score_updated, @match.score_updated %>
+
+    <div class="row">
+      <%= submit_tag "Save", class: "tiny button [radius round]" %>
+    </div>
+      <% end %>
+</div>

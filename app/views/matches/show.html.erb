@@ -54,7 +54,8 @@
           <% if current_user.role_on_team(@match.home_team) == 'manager' || 'player' %>
             <%= render partial: 'availabilities/form', locals: { match: @match, user: @current_user } %>
           <% end %>
-          <%= link_to "Make me unavailable", availabilities_delete_path(match_id: @match.id), method: :delete %>
+         
+         
         </div>
          <%= params[:id] %> <%= params["id"] %> <%= params["id"].to_i %>
   </div> 

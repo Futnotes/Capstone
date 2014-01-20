@@ -51,17 +51,17 @@ class MatchesController < ApplicationController
     @match = Match.find(params[:id])
     @team = @match.away_team
 
-    #adding team scores
-    params[:match][:home_team_score].to_i.times do
-      Goal.create(match_id: @match.id, team_id: @match.home_team_id)
-    end
+    #adding team scores (might be redundant code)
+    #params[:match][:home_team_score].to_i.times do
+      #Goal.create(match_id: @match.id, team_id: @match.home_team_id)
+    #end
 
     #deleting the away team score in favour 
     #params[:match][:away_team_score].to_i.times do
       #Goal.create(match_id: @match.id, team_id: @match.away_team_id)
     #end
 
-    # Delete Goal / Add scorer
+    #Delete Goal / Add scorer
     if @match.home_team_score != 0
       params[:match][:goals_attributes].each do |key, value|
         if value["_destroy"] == "1"
@@ -111,6 +111,13 @@ class MatchesController < ApplicationController
     @match.update_attribute(:score_updated, true)
  
     redirect_to :back
+  end
+
+  #code not used at the moment. Want to split out update method
+  def update_score_post_match
+    @match = Match.find(params[:match_id])
+
+    @match.update_attribute(:away_team_score, params[:away_team_score].to_i)
   end
 
    private
