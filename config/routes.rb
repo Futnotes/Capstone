@@ -3,9 +3,11 @@ Blocnotes::Application.routes.draw do
   match "/players/new" => "players#create", :via => [:post]
   get "goals/edit"
   match "availabilities/new" => "availabilities#create", :via => [:post]
-  match "availabilities/delete" => "availabilities#destroy", :via => [:delete]
+  #match "availabilities/delete" => "availabilities#destroy", :via => [:delete]
   match "goals/new" => "goals#create", :via => [:post]
   devise_for :users
+
+  resources :availabilities, only: [:create, :destroy, :new]
   
   resources :teams do
     resources :players, only: [:create]

@@ -2,7 +2,7 @@
 <%= form_for(Availability.new, :url => availabilities_new_path, :method => :post) do |f| %>
    
 <%= f.hidden_field :match_id, value: params[:id] %>
-<%= f.hidden_field :user_id, :value => current_user.id %>
+<%= f.hidden_field :user_id, value: current_user.id %>
 
 <%= f.submit "Can you play?",  class: "button postfix" %>
 
