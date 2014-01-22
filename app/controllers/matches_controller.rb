@@ -64,12 +64,17 @@ class MatchesController < ApplicationController
     #Delete Goal / Add scorer
     if @match.home_team_score != 0
       params[:match][:goals_attributes].each do |key, value|
-        if value["_destroy"] == "1"
-          Goal.destroy(value["id"].to_i)
-  
+        if value["id"].to_i != 0
+          if value["_destroy"] == "1"
+            Goal.destroy(value["id"].to_i)
+          else
+            goal = Goal.find(value["id"].to_i)
+            goal.update_attribute(:user_id, value["user_id"].to_i)
+          end
         else
-          goal = Goal.find(value["id"].to_i)
-          goal.update_attribute(:user_id, value["user_id"].to_i)
+          goal = Goal.create(user_id: value["user_id"].to_i, 
+                             team_id: @match.home_team_id,
+                             match_id: @match.id)
         end
       end
     end
