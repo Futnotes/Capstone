@@ -8,5 +8,5 @@ class Team < ActiveRecord::Base
   def team_matches
     self.home_matches + self.away_matches   
   end
-  
+
 end

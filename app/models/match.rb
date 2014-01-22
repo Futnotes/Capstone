@@ -8,6 +8,9 @@ class Match < ActiveRecord::Base
   has_many :availabilities
 
   accepts_nested_attributes_for :goals, allow_destroy: true
+
+  scope :future_fixtures, -> lambda { where("kick_off > ? ", DateTime.now) }
+  scope :past_results, -> lambda { where("kick_off < ? ", DateTime.now) }
   
   def winner
     #This will require you to write other methods that calculate the goals based on the two teams
