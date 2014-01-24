@@ -11,8 +11,10 @@ Blocnotes::Application.routes.draw do
     resources :players, only: [:create]
   end
 
-  resources :matches
-
+  resources :matches do
+    put :pre_update, to: :pre_update
+    put :post_update, to: :post_update
+  end
 
   match "about" => 'welcome#about', via: :get
 

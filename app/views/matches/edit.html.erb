@@ -1,4 +1,12 @@
 
+
+    <%= if @match.kick_off > DateTime.now %>
+       <%= render 'pre_update' %>
+      <%= else @match.kick_off < DateTime.now %>
+        <%= render 'post_update' %>
+      <%= end%>
+ <%=  end %>
+
 <%= form_for @match do |f| %>
 
 
@@ -13,9 +21,11 @@
    <%= f.label "Home Team Score" %> 
    <%=f.text_field :home_team_score, value: @match.home_team_score %>
 
+   <h3> Home Team Goals </h3>
    <%= f.fields_for :goals, @match.home_team_score do |builder| %>
     <%= render 'goals/add_scorer', f: builder %>
    <% end %>
+
     <%= link_to_add_fields "Add Home Team Goal", f, :goals %>
 
  <%#= f.label "#{@match.home_team.team_name} Score" %>

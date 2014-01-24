@@ -44,12 +44,17 @@ class MatchesController < ApplicationController
 
   def edit
     @match = Match.find(params[:id])
+      if @match.kick_off > DateTime.now
+        render 'pre_update'
+      else @match.kick_off < DateTime.now
+        render 'post_update'
+      end
   end
 
-  def update
+  #def update
     #note: kick-off editing doesn't work
-    @match = Match.find(params[:id])
-    @team = @match.away_team
+    #@match = Match.find(params[:id])
+    #@team = @match.away_team
 
     #adding team scores (might be redundant code)
     #params[:match][:home_team_score].to_i.times do
@@ -62,43 +67,46 @@ class MatchesController < ApplicationController
     #end
 
     #Delete Goal / Add scorer
-    if @match.home_team_score != 0
-      params[:match][:goals_attributes].each do |key, value|
-        if value["_destroy"] == "1"
-          Goal.destroy(value["id"].to_i)
-  
-        else
-          goal = Goal.find(value["id"].to_i)
-          goal.update_attribute(:user_id, value["user_id"].to_i)
-        end
-      end
-    end
+    #if @match.home_team_score != 0
+     # params[:match][:goals_attributes].each do |key, value|
+      #  if value["id"].to_i != 0
+       #   if value["_destroy"] == "1"
+        #    Goal.destroy(value["id"].to_i)
+         # else
+         # goal = Goal.find(value["id"].to_i)
+         # goal.update_attribute(:user_id, value["user_id"].to_i)
+         # end
+       # else
+        #  goal = Goal.create( user_id: value["user_id"].to_i,
+         #                     team_id: @match.home_team_id,
+          #                    mathc_id: @match.id)
+        #end
+      #end
+    #end
 
-    kick_off = DateTime.new(params[:match]["kick_off(1i)"].to_i,
-    params[:match]["kick_off(2i)"].to_i,
-    params[:match]["kick_off(3i)"].to_i,
-    params[:match]["kick_off(4i)"].to_i,
-    params[:match]["kick_off(5i)"].to_i,
-    params[:match]["kick_off(6i)"].to_i)
+    #kick_off = DateTime.new(params[:match]["kick_off(1i)"].to_i,
+    #params[:match]["kick_off(2i)"].to_i,
+    #params[:match]["kick_off(3i)"].to_i,
+    #params[:match]["kick_off(4i)"].to_i,
+    #params[:match]["kick_off(5i)"].to_i,
+    #params[:match]["kick_off(6i)"].to_i)
 
-    @match.update_attribute(:kick_off, kick_off)
+    #@match.update_attribute(:kick_off, kick_off)
 
 
     #doesn't work if both are changed... logic to ensure changes are only made if actual changes are made.
-      if @team.team_name != params[:match][:team_name]
-        @team.update_attribute(:team_name , params[:match][:team_name])
-      elsif @match.away_team_score != params[:match][:away_team_score]
-         @match.update_attribute(:away_team_score , params[:match][:away_team_score])  
-        flash[:notice] = "Match was updated."
-        redirect_to @match
-      else
-        flash[:error] = "There was an error saving the match details. Please try again."
-        render :show
-      end
+      #if @team.team_name != params[:match][:team_name]
+      #  @team.update_attribute(:team_name , params[:match][:team_name])
+      #elsif @match.away_team_score != params[:match][:away_team_score]
+      #   @match.update_attribute(:away_team_score , params[:match][:away_team_score])  
+      #  flash[:notice] = "Match was updated."
+      #  redirect_to @match
+      #else
+     #   flash[:error] = "There was an error saving the match details. Please try again."
+    #    render :show
+   #   end
 
-
-
-  end
+  #end
 
   def update_goals
     #adding team scores
@@ -113,11 +121,58 @@ class MatchesController < ApplicationController
     redirect_to :back
   end
 
-  #code not used at the moment. Want to split out update method
-  def update_score_post_match
-    @match = Match.find(params[:match_id])
+  def pre_update
+      @match = Match.find(params[:id])
+      @team = @match.away_team
 
-    @match.update_attribute(:away_team_score, params[:away_team_score].to_i)
+      if @team.team_name != params[:match][:team_name]
+        @team.update_attribute(:team_name , params[:match][:team_name])
+      else
+        flash[:error] = "There was an error saving the match details. Please try again."
+        render :show
+      end
+
+
+      kick_off = DateTime.new(params[:match]["kick_off(1i)"].to_i,
+          params[:match]["kick_off(2i)"].to_i,
+          params[:match]["kick_off(3i)"].to_i,
+          params[:match]["kick_off(4i)"].to_i,
+          params[:match]["kick_off(5i)"].to_i,
+          params[:match]["kick_off(6i)"].to_i)
+
+      @match.update_attribute(:kick_off, kick_off)
+
+  end
+
+  def post_update
+      @match = Match.find(params[:id])
+      @team = @match.away_team
+
+      if @match.home_team_score != 0
+      params[:match][:goals_attributes].each do |key, value|
+        if value["id"].to_i != 0
+            if value["_destroy"] == "1"
+              Goal.destroy(value["id"].to_i)
+            else
+              goal = Goal.find(value["id"].to_i)
+              goal.update_attribute(:user_id, value["user_id"].to_i)
+            end
+        else
+          goal = Goal.create( user_id: value["user_id"].to_i,
+                              team_id: @match.home_team_id,
+                              match_id: @match.id)
+        end
+      end
+    
+      if @match.away_team_score != params[:match][:away_team_score]
+         @match.update_attribute(:away_team_score , params[:match][:away_team_score])  
+        flash[:notice] = "Match was updated."
+        redirect_to @match
+      else
+        flash[:error] = "There was an error saving the match details. Please try again."
+        render :show
+      end
+    end
   end
 
    private
@@ -125,4 +180,5 @@ class MatchesController < ApplicationController
   def match_params
     params.require(:match).permit(:home_team_id, :away_team_id, :kick_off, :home_team_score, :away_team_score, :score_updated, goal_attributes: [:id, :team_id, :match_id, :user_id] )
   end
+
 end

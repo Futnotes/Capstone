@@ -18,7 +18,7 @@
 
         <h4><strong>Upcoming Fixtures</strong></h4>
           <div>
-            <% @team.team_matches.each do |match| %>
+            <% @team.future_matches.each do |match| %>
               <div>
                 <h4><%= match.home_team.team_name %></h4>
                 <h6> VS </h6>
@@ -39,6 +39,25 @@
           </div>
       </div>
 
+      <div class="large-6 columns">
+
+        <h4><strong>Recent Results</strong></h4>
+          <div>
+            <% @team.past_matches.each do |match| %>
+              <div>
+                <h4><%= match.home_team.team_name%>&nbsp&nbsp<% if match.score_updated == true %><%=match.home_team_score %></h4><% end %>
+                <h6> VS </h6>
+                <h4><%= match.away_team.team_name %>&nbsp&nbsp<% if match.score_updated == true %><%=match.away_team_score %></h4><% end %>
+              </div>
+              <div>
+                <p>Kick Off: <%= match.kick_off.strftime("%A %d %B %Y %H:%S") %><p>
+              </div>
+       
+                <%= link_to "Result Details", match %>
+            
+            <% end %>
+          </div>
+      </div>
   <!-- Squad -->
 
       <div class="large-6 columns">
