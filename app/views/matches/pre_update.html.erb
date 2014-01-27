@@ -1,0 +1,15 @@
+<%= form_for @match, method: :put, :url => {:controller => 'matches', :action => 'pre_update', :match_id=> params[:id]} do |f| %>
+    
+    <%= f.hidden_field :match_id, value: params[:id] %>
+    <%= f.hidden_field :home_team_id, value: params[:home_team_id] %>
+  
+    <%= f.label "Away Team Name" %>
+    <%=f.text_field :team_name, value: @match.away_team.team_name %>
+
+    <%= f.label :kick_off %>
+    <%= f.datetime_select :kick_off, value: @giraffe %>
+  
+    <%= f.submit "Save", class: "button radius round" %>
+
+  <% end %>
+

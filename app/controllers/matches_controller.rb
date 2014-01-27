@@ -122,7 +122,7 @@ class MatchesController < ApplicationController
   end
 
   def pre_update
-      @match = Match.find(params[:id])
+      @match = Match.find(params[:match_id])
       @team = @match.away_team
 
       if @team.team_name != params[:match][:team_name]
