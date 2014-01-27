@@ -129,7 +129,6 @@ class MatchesController < ApplicationController
         @team.update_attribute(:team_name , params[:match][:team_name])
       else
         flash[:error] = "There was an error saving the match details. Please try again."
-        render :show
       end
 
 
@@ -142,10 +141,11 @@ class MatchesController < ApplicationController
 
       @match.update_attribute(:kick_off, kick_off)
 
+      render :show
   end
 
   def post_update
-      @match = Match.find(params[:id])
+      @match = Match.find(params[:match_id])
       @team = @match.away_team
 
       if @match.home_team_score != 0
